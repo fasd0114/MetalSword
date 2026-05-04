@@ -11,7 +11,7 @@
 | **중앙 집중식 AI 제어** | [/Scripts/Monster](https://github.com/fasd0114/MetalSword/tree/main/MetalSword/Assets/Scripts/Monster) | FSM 기반의 Monster AI 관리 |
 | **성능 최적화** | [MonsterAI.cs](https://github.com/fasd0114/MetalSword/blob/main/MetalSword/Assets/Scripts/Monster/MonsterAI.cs) | 애니메이션 클립 데이터 캐싱을 통한 런타임 최적화 |
 | **데이터 기반 설계** | [/Scripts/Data](https://github.com/사용자명/레포이름/tree/main/Assets/Scripts/Data) | ScriptableObject 등을 활용한 시스템 확장성 확보 |
-| **데이터 영속성 관리** | [DataManager.cs][https://github.com/fasd0114/MetalSword/blob/main/MetalSword/Assets/Scripts/Managers/DataManager.cs]| 세이브 시스템 및 싱글톤 기반의 데이터 연속성 유지 |
+| **데이터 영속성 관리** | [DataManager.cs](https://github.com/fasd0114/MetalSword/blob/main/MetalSword/Assets/Scripts/Managers/DataManager.cs)| 세이브 시스템 및 싱글톤 기반의 데이터 연속성 유지 |
 
 
 <br>
