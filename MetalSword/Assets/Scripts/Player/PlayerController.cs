@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
         NotifyHealthChanged();
     }
 
-
     private void Awake()
     {
         combat = GetComponent<PlayerCombat>();
@@ -92,22 +91,33 @@ public class PlayerController : MonoBehaviour
         inventory = Resources.Load<Inventory>("Items/Inventory");
         if (inventory != null)
         {
-            inventory.OnInventoryChanged += () => {
-                int oldMax = cachedMaxHealth;
-                AssignSlots();               
-                UpdateCachedStats();         
-
-                int delta = cachedMaxHealth - oldMax;
-                if (delta > 0) currentHealth = Mathf.Clamp(currentHealth + delta, 0, cachedMaxHealth);
-                NotifyHealthChanged();
-            };
+            inventory.OnInventoryChanged += HandleInventoryChanged;
         }
 
         AssignSlots();
         UpdateCachedStats();
         currentHealth = MaxHealth;
     }
+    private void HandleInventoryChanged()
+    {
+        int oldMax = cachedMaxHealth;
+        AssignSlots();
+        UpdateCachedStats();
 
+        int delta = cachedMaxHealth - oldMax;
+        if (delta > 0)
+        {
+            currentHealth = Mathf.Clamp(currentHealth + delta, 0, cachedMaxHealth);
+        }
+        NotifyHealthChanged();
+    }
+    private void OnDestroy()
+    {
+        if (inventory != null)
+        {
+            inventory.OnInventoryChanged -= HandleInventoryChanged;
+        }
+    }
     private void Start()
     {
         deathUIPanel = GameObject.FindWithTag("DeathUI");
