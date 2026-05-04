@@ -15,6 +15,6 @@ MonoBehaviour:
   maxHp: 100
   attackRange: 2
   attackCooldown: 1.5
-  goldReward: 10
-  expReward: 5
+  goldReward: 50
+  expReward: 30
   deathEffectPrefab: {fileID: 0}

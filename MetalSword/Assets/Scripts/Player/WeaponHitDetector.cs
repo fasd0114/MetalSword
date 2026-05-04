@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WeaponHitDetector : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerCombat playerCombat;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Monster"))
         {
-            playerController.HandleWeaponHit(other);
+            playerCombat.HandleWeaponHit(other);
         }
     }
 }

@@ -10,6 +10,9 @@ public class InventoryUI : MonoBehaviour
     public Inventory inventoryData;
     public TMP_Text goldText;
 
+    private PlayerController playerCtrl;
+    private PlayerCombat playerCombat;
+
     public TMP_Text swordDamageText;
     // ① 플레이어 체력 표시용 텍스트 필드 추가
     public TMP_Text healthText;
@@ -23,6 +26,11 @@ public class InventoryUI : MonoBehaviour
         GenerateSlots();
         RefreshUI();
     }
+    private void OnEnable() // UI가 켜질 때 딱 한 번만 참조
+    {
+        playerCtrl = FindObjectOfType<PlayerController>();
+        playerCombat = FindObjectOfType<PlayerCombat>();
+    }
 
     private void Update()
     {
@@ -30,16 +38,14 @@ public class InventoryUI : MonoBehaviour
         {
             goldText.text = $"{PlayerStats.Instance.CurrentGold}";
         }
-
-        var player = FindObjectOfType<PlayerController>();
-        if (player == null) return;
+        if (playerCtrl == null) return;
+        if (playerCombat == null) return;
 
         if (swordDamageText != null)
-            swordDamageText.text = $"{player.AttackDamage}";
+            swordDamageText.text = $"{playerCombat.AttackDamage}";
 
-        // ② healthText가 연결되어 있으면 현재/최대 체력 표시
         if (healthText != null)
-            healthText.text = $"{player.CurrentHealth} / {player.MaxHealth}";
+            healthText.text = $"{playerCtrl.CurrentHealth} / {playerCtrl.MaxHealth}";
     }
 
     private void GenerateSlots()

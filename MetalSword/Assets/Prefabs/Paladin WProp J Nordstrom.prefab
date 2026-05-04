@@ -401,13 +401,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 52a2bd12707fbbc40b107eb84cd5bb16,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
-        'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
-        animation clip 'Hit'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 52a2bd12707fbbc40b107eb84cd5bb16,
         type: 3}
@@ -475,6 +469,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 973460673177454994}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 52a2bd12707fbbc40b107eb84cd5bb16,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8041439867700354169}
     - targetCorrespondingSourceObject: {fileID: -1996471662184344498, guid: 52a2bd12707fbbc40b107eb84cd5bb16,
         type: 3}
       insertIndex: -1
@@ -523,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf641c10e2c5c64f8a74dde20173546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 8781426092141677329}
+  playerCombat: {fileID: 8041439867700354169}
 --- !u!1 &6239061229744603678 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 52a2bd12707fbbc40b107eb84cd5bb16,
@@ -572,13 +570,7 @@ MonoBehaviour:
   runMultiplier: 2
   rotationSpeed: 5
   speedAcceleration: 5
-  skillCooldownTime: 5
   weaponCollider: {fileID: 4765911409180515163}
-  attackSound: {fileID: 8300000, guid: 445d296ccadecf94288dc93ebe5e8767, type: 3}
-  skillSound: {fileID: 8300000, guid: a92d5a2b6e8f2db4697bfee3e0392679, type: 3}
-  hitSound: {fileID: 8300000, guid: 69db6556d7a756840b7f82a8a5007a62, type: 3}
-  attackSoundDelay: 0.2
-  skillSoundDelay: 0.4
   deathUIPanel: {fileID: 0}
   spawnPoint: {fileID: 0}
 --- !u!82 &973460673177454994
@@ -677,3 +669,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8041439867700354169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239061229744603678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6982cec80b7702f4e98274f00dc99e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillCooldownTime: 5
+  weaponCollider: {fileID: 4765911409180515163}
+  attackSound: {fileID: 8300000, guid: 445d296ccadecf94288dc93ebe5e8767, type: 3}
+  skillSound: {fileID: 8300000, guid: a92d5a2b6e8f2db4697bfee3e0392679, type: 3}
+  hitSound: {fileID: 8300000, guid: 69db6556d7a756840b7f82a8a5007a62, type: 3}
+  attackSoundDelay: 0.2
+  skillSoundDelay: 0.4

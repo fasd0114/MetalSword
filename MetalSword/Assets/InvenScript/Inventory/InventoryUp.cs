@@ -19,13 +19,16 @@ public class InventoryUp : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)  // 오른쪽 클릭으로 강화
         {
             var pc = FindObjectOfType<PlayerController>();
+            var inv = Resources.Load<Inventory>("Items/Inventory");
             int oldMax = pc != null ? pc.MaxHealth : 0;
 
             if (inventorySlot.EnhanceItem(ref playerGold))
             {
                 UpdateEnhancementText();
+                
                 if (pc != null)
                     pc.RefreshStatsAfterEnhancement(oldMax);
+                inv?.OnInventoryChanged?.Invoke();
             }
         }
     }

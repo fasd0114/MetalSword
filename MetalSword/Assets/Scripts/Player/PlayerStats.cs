@@ -1,4 +1,5 @@
 // PlayerStats.cs
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,9 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
+    public Action<int, float> OnXpChanged;
 
-    [Header("골드·경험치·레벨 설정 (시작값)")]
+    [Header("골드·경험치·레벨 설정")]
     [SerializeField] private int startingGold = 100;
     [SerializeField] private int startingExp = 0;
     [SerializeField] private int startingLevel = 1;
@@ -58,6 +60,10 @@ public class PlayerStats : MonoBehaviour
             PlayerLevel++;
             ExpToNextLevel = Mathf.RoundToInt(ExpToNextLevel * 1.1f);
         }
+
+        // 값이 변경된 후 이벤트 호출
+        float xpRatio = Mathf.Clamp01((float)CurrentExp / ExpToNextLevel);
+        OnXpChanged?.Invoke(PlayerLevel, xpRatio);
     }
     public void ResetToStartingValues()
     {
@@ -66,4 +72,5 @@ public class PlayerStats : MonoBehaviour
         PlayerLevel = startingLevel;
         ExpToNextLevel = startingExpToNextLevel;
     }
+
 }

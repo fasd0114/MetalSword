@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewInventory", menuName = "Inventory/Inventory")]
 public class Inventory : ScriptableObject
 {
+    public System.Action OnInventoryChanged;
+
     public int maxSlots = 20;
     public List<InventorySlot> items = new();
 
@@ -35,6 +37,7 @@ public class Inventory : ScriptableObject
         if (existing != null)
         {
             existing.quantity += amount;
+            OnInventoryChanged?.Invoke();
             return true;
         }
 
@@ -43,8 +46,10 @@ public class Inventory : ScriptableObject
         if (empty != null)
         {
             empty.SetItem(newItem, amount);
+            OnInventoryChanged?.Invoke();
             return true;
         }
+
 
         Debug.LogWarning("인벤토리에 빈 슬롯이 없습니다.");
         return false;

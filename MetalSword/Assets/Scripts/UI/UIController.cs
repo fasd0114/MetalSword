@@ -18,36 +18,55 @@ public class UIController : MonoBehaviour
 
     private PlayerStats stats;
     private PlayerController playerCtrl;
+    private PlayerCombat playerCombat;
 
     private void Start()
     {
         stats = PlayerStats.Instance;
         playerCtrl = FindObjectOfType<PlayerController>();
+        playerCombat = FindObjectOfType<PlayerCombat>();
+
+        if (stats != null)
+            UpdateXpUI(stats.PlayerLevel, (float)stats.CurrentExp / stats.ExpToNextLevel);
+
+        if (playerCtrl != null)
+        {
+            UpdateHpUI((float)playerCtrl.CurrentHealth / playerCtrl.MaxHealth);
+            UpdateCooldownUI(0f);
+
+            stats.OnXpChanged += UpdateXpUI;
+            playerCtrl.OnHealthChanged += UpdateHpUI;
+        }
+        if (playerCombat != null) // 추가
+        {
+            playerCombat.OnCooldownChanged += UpdateCooldownUI; // Combat의 이벤트를 구독
+        }
+    }
+    private void OnDestroy()
+    {
+        if (PlayerStats.Instance != null)
+            PlayerStats.Instance.OnXpChanged -= UpdateXpUI;
+
+        if (playerCtrl != null)
+        {
+            playerCtrl.OnHealthChanged -= UpdateHpUI;
+        }
+        if (playerCombat != null)
+            playerCombat.OnCooldownChanged -= UpdateCooldownUI;
+    }
+    private void UpdateXpUI(int level, float xpRatio)
+    {
+        levelText.text = level.ToString();
+        xpFillImage.fillAmount = xpRatio;
     }
 
-    private void Update()
+    private void UpdateHpUI(float hpRatio)
     {
-        // 레벨/경험치
-        levelText.text = $"{stats.PlayerLevel}";
-        xpFillImage.fillAmount =
-            Mathf.Clamp01((float)stats.CurrentExp / stats.ExpToNextLevel);
+        hpFillImage.fillAmount = hpRatio;
+    }
 
-        // HP
-        if (playerCtrl != null)
-            hpFillImage.fillAmount =
-            Mathf.Clamp01((float)playerCtrl.CurrentHealth
-                                         / playerCtrl.MaxHealth);
-
-        // 스킬 쿨타임
-        if (playerCtrl.IsSkillOnCooldown)
-        {
-            float ratio = playerCtrl.RemainingSkillCooldown
-                        / playerCtrl.SkillCooldownTime;
-            skillCooldownOverlay.fillAmount = Mathf.Clamp01(ratio);
-        }
-        else
-        {
-            skillCooldownOverlay.fillAmount = 0f;
-        }
+    private void UpdateCooldownUI(float cooldownRatio)
+    {
+        skillCooldownOverlay.fillAmount = cooldownRatio;
     }
 }
