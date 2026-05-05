@@ -7,7 +7,7 @@
 
 | 기능 구분 | 핵심 스크립트 / 폴더 위치 | 주요 구현 및 트러블 슈팅 포인트 |
 | :--- | :--- | :--- |
-| **Player 시스템** | [/Scripts/Boss/AI](https://github.com/fasd0114/MetalSword/tree/main/MetalSword/Assets/Scripts/Player) | 상태 제어 및 전투 로직 관리 |
+| **Player 시스템** | [/Scripts/Player](https://github.com/fasd0114/MetalSword/tree/main/MetalSword/Assets/Scripts/Player) | 상태 제어 및 전투 로직 관리 |
 | **중앙 집중식 AI 제어** | [/Scripts/Monster](https://github.com/fasd0114/MetalSword/tree/main/MetalSword/Assets/Scripts/Monster) | FSM 기반의 Monster AI 관리 |
 | **성능 최적화** | [MonsterAI.cs](https://github.com/fasd0114/MetalSword/blob/main/MetalSword/Assets/Scripts/Monster/MonsterAI.cs) | 애니메이션 클립 데이터 캐싱을 통한 런타임 최적화 |
 | **데이터 기반 설계** | [MonsterData.cs](https://github.com/fasd0114/MetalSword/blob/main/MetalSword/Assets/Scripts/Monster/MonsterData.cs) | ScriptableObject 등을 활용한 시스템 확장성 확보 |
